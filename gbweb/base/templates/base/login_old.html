@@ -1,0 +1,41 @@
+{% extends 'main.html'%}
+{% block title %}
+Login Here
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+{%if page == 'login' %}
+<div class = "container">
+	<form method="post" action "">
+		{% csrf_token %}
+		{{form}}
+		<label> Username: </label>
+		<input type="text" name="username" placeholder="Enter Username" />
+
+		<label> Password: </label>
+		<input type="password" name="password" placeholder="Enter Username" />
+
+		<input type="submit" value="Login" />
+		<p>Havent sign up yet?</p>
+		<a href="{% url 'register' %}" class="btn btn--link">SignUp</a>
+	</form>
+</div>
+
+{%else%}
+<div>
+	<form method="POST" action="" class="form-group">
+		{% csrf_token %}
+		{{ form|crispy }}
+		<button type="submit" value="Register" class="btn btn-dark">Register</button>
+	</form>
+	<p> Already signed up?</p>
+	<a href="{% url 'login' %} ">Log in</a>
+</div>
+
+{%endif%}
+
+{% endblock %}
